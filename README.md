@@ -13,4 +13,4 @@
 - `lazy_collect(lazy, accumulator=(x, data) => data.arr.push(x)) -> async collect()`
 - - should be self-explanatory. uses `lazy_run`'s data object (`data.arr`) to accumulate
 
-###More features coming soon!
+##More features coming soon!
