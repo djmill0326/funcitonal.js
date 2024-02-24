@@ -3,9 +3,7 @@ export const array_iter = (input, offset=0, reverse=false) => {
     const factor = reverse * 2 - 1;
     const x = reverse ? input.length - offset - 1 : offset;
     let index = 0;
-    return () => {
-        return input[x - index++ * factor];
-    }
+    return () => input[x - index++ * factor];
 };
 
 export const kv_iter = (input, offset=0, reverse=false) => array_iter(Object.keys(input).map(key => ({ key, value: input[key] })), offset, reverse);
