@@ -15,16 +15,14 @@ export const map = (next, f=x=>x, proto=[]) => {
     return proto;
 };
 
-export const lazy = (next, f=x=>x) => async () => {
-    const promise = new Promise((resolve, reject) => {
+export const lazy = (next, f=x=>x) => 
+    () => new Promise((resolve, reject) => {
         const x = next();
         if (x) resolve(f(x));
         else reject("iterator failed to yield");
     });
-    return await promise;
-};
 
-export const lazy_run = async (lazy, on_next=()=>{}, on_finish=()=>{}, init=()=>({})) => {
+export const lazy_run = (lazy, on_next=()=>{}, on_finish=()=>{}, init=()=>({})) => {
     const data = init();
     const promise = new Promise(async (resolve) => {
         let x = true;
@@ -34,7 +32,7 @@ export const lazy_run = async (lazy, on_next=()=>{}, on_finish=()=>{}, init=()=>
         }
         resolve(data);
     });
-    return await promise;
+    return promise;
 };
 
-export const lazy_collect = async (lazy, accumulator=(x, data) => data.arr.push(x)) => lazy_run(lazy, accumulator, ()=>{}, ()=>({ arr: [] })).then(x => x.arr);
+export const lazy_collect = (lazy, accumulator=(x, data) => data.arr.push(x)) => lazy_run(lazy, accumulator, ()=>{}, ()=>({ arr: [] })).then(x => x.arr);
