@@ -6,9 +6,11 @@ export const array_iter = (input, offset=0, reverse=false) => {
     return () => input[x - index++ * factor];
 };
 
-export const kv_iter = (input, offset=0, reverse=false) => array_iter(Object.keys(input).map(key => ({ key, value: input[key] })), offset, reverse);
+export const kv_iter = (input, offset=0, reverse=false) => 
+    array_iter(Object.keys(input).map(key => ({ key, value: input[key] })), offset, reverse);
 
-export const rev = (f) => (input, offset=0) => f(input, offset, true);
+export const rev = (f) => 
+    (input, offset=0) => f(input, offset, true);
 
 export const map = (next, f=x=>x, proto=[]) => {
     for (let x; x = next(); proto.push(f(x)));
@@ -35,4 +37,5 @@ export const lazy_run = (lazy, on_next=()=>{}, on_finish=()=>{}, init=()=>({})) 
     return promise;
 };
 
-export const lazy_collect = (lazy, accumulator=(x, data) => data.arr.push(x)) => lazy_run(lazy, accumulator, ()=>{}, ()=>({ arr: [] })).then(x => x.arr);
+export const lazy_collect = (lazy, accumulator=(x, data) => data.arr.push(x)) => 
+    lazy_run(lazy, accumulator, ()=>{}, ()=>({ arr: [] })).then(x => x.arr);
