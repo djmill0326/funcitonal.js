@@ -1,7 +1,8 @@
 # functional.js
-- easy to use
+- easy to use (debatable)
 - supports async/await
 - supports lazy eval
+- might be efficient ;)
 
 ## supported functions
 - `array_iter(input, offset=0, reverse=false) -> next()` - converts any JS array into an iterator
